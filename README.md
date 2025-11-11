@@ -1,9 +1,9 @@
 📋 TaskFlow - Gerenciador de Tarefas Completo
 
-https://img.shields.io/badge/Status-Conclu%C3%ADdo-green
-https://img.shields.io/badge/Frontend-HTML/CSS/JS-orange
-https://img.shields.io/badge/Backend-Flask/MySQL-blue
-https://img.shields.io/badge/API-RESTful-lightgrey
+![Status](https://img.shields.io/badge/Status-Concluído-green)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Flask](https://img.shields.io/badge/Flask-3.0.0-lightgrey)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
 
 📖 Sobre o Projeto
 O TaskFlow é um sistema completo de gerenciamento de tarefas com frontend moderno e backend robusto. Desenvolvido com tecnologias web full-stack, oferece uma experiência fluida com design glassmorphism e funcionalidades completas de CRUD.
