@@ -115,6 +115,7 @@ DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=taskflow_db
 SECRET_KEY=sua_chave_secreta
+
 Estrutura do Banco
 sql
 CREATE TABLE tasks (
@@ -128,6 +129,7 @@ CREATE TABLE tasks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 🐛 Troubleshooting
 Problemas Comuns
 Backend não conecta ao MySQL:
