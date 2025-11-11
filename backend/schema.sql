@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     description TEXT,
     status ENUM('pendente', 'em_andamento', 'concluida') DEFAULT 'pendente',
     priority ENUM('baixa', 'media', 'alta') DEFAULT 'media',
-    due_date DATE NULL,  -- Permitir NULL
+    due_date DATE NULL,  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

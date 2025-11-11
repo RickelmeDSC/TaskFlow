@@ -1,16 +1,10 @@
-// Configurações da API
 const API_BASE_URL = 'http://localhost:5000/api';
-
-// Estado da aplicação
 let currentFilter = 'all';
 let tasks = [];
 
-// Debug: Verificar se scripts carregaram
 console.log('✅ app.js carregado com sucesso');
 
-// Função para exibir mensagens de erro
 function showError(message) {
-    // Remover erros anteriores
     const existingError = document.querySelector('.error');
     if (existingError) {
         existingError.remove();
@@ -28,7 +22,6 @@ function showError(message) {
     }, 5000);
 }
 
-// Função para exibir mensagens de sucesso
 function showSuccess(message) {
     const successDiv = document.createElement('div');
     successDiv.className = 'success';
@@ -42,7 +35,6 @@ function showSuccess(message) {
     }, 3000);
 }
 
-// Função para verificar se a API está online
 async function checkAPIHealth() {
     try {
         console.log('🔄 Verificando conexão com a API...');
@@ -59,7 +51,6 @@ async function checkAPIHealth() {
     }
 }
 
-// Função utilitária para fazer requisições HTTP
 async function apiRequest(endpoint, options = {}) {
     try {
         console.log(`🌐 Requisição para: ${API_BASE_URL}${endpoint}`, options);
@@ -89,27 +80,20 @@ async function apiRequest(endpoint, options = {}) {
     }
 }
 
-// Configurar os botões de filtro
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remover classe active de todos os botões
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Adicionar classe active ao botão clicado
             this.classList.add('active');
-            
-            // Atualizar filtro atual e recarregar tarefas
             currentFilter = this.dataset.filter;
             console.log(`🔍 Filtrando por: ${currentFilter}`);
-            displayTasks(tasks); // Reutiliza tasks já carregadas
+            displayTasks(tasks);
         });
     });
 }
 
-// Configurar busca em tempo real
 function setupSearch() {
     const searchContainer = document.createElement('div');
     searchContainer.className = 'search-container';
@@ -128,7 +112,6 @@ function setupSearch() {
     });
 }
 
-// Filtrar tarefas por busca
 function filterTasksBySearch(searchTerm) {
     if (!searchTerm) {
         displayTasks(tasks);
@@ -144,7 +127,6 @@ function filterTasksBySearch(searchTerm) {
     displayTasks(filteredTasks);
 }
 
-// Atualizar estatísticas
 function updateStats() {
     const total = tasks.length;
     const pending = tasks.filter(t => t.status === 'pendente').length;
@@ -173,7 +155,6 @@ function updateStats() {
     `;
 }
 
-// Verificar tarefas próximas do vencimento
 function checkDueDates() {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -191,30 +172,24 @@ function checkDueDates() {
     });
 }
 
-// Inicialização da aplicação
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 TaskFlow inicializado');
     
-    // Debug: Verificar elementos do DOM
     console.log('📝 Formulário encontrado:', document.getElementById('taskForm'));
     console.log('📋 Lista de tarefas encontrada:', document.getElementById('tasksList'));
     
-    // Configurar componentes
     setupFilters();
     setupSearch();
     
-    // Verificar saúde da API e carregar tarefas
     checkAPIHealth().then(apiOnline => {
         if (apiOnline) {
             loadTasks();
         }
     });
     
-    // Verificar vencimentos a cada minuto
     setInterval(checkDueDates, 60000);
 });
 
-// Função de debug para verificar requisições
 window.debugAPI = async function() {
     console.log('🔍 Debugando API...');
     try {
@@ -228,12 +203,10 @@ window.debugAPI = async function() {
     }
 }
 
-// Executar debug automaticamente
 setTimeout(() => {
     window.debugAPI();
 }, 1000);
 
-// Exportar para uso global
 window.apiRequest = apiRequest;
 window.showError = showError;
 window.showSuccess = showSuccess;

@@ -9,28 +9,21 @@ O TaskFlow é um sistema completo de gerenciamento de tarefas com frontend moder
 
 🛠️ Tecnologias Utilizadas
 Frontend
-HTML5 - Estrutura semântica
-
-CSS3 - Glassmorphism e design responsivo
-
-JavaScript ES6+ - Interatividade e consumo de API
+# HTML5 - Estrutura semântica
+# CSS3 - Glassmorphism e design responsivo
+# JavaScript ES6+ - Interatividade e consumo de API
 
 Backend
-Flask 3.0.0 - Framework web Python
-
-MySQL - Banco de dados relacional
-
-PyMySQL - Conexão com MySQL
-
-Flask-CORS - Habilitar requisições cross-origin
+# Flask 3.0.0 - Framework web Python
+# MySQL - Banco de dados relacional
+# PyMySQL - Conexão com MySQL
+# Flask-CORS - Habilitar requisições cross-origin
 
 🚀 Como Executar o Projeto
 Pré-requisitos
-Python 3.8+
-
-MySQL Server
-
-Navegador moderno
+# Python 3.8+
+# MySQL Server
+# Navegador moderno
 
 1. Configuração do Backend
 bash
@@ -83,33 +76,27 @@ taskflow/
     └── js/tasks.js         # Funcionalidades de tarefas
 🔌 API Endpoints
 Método	Endpoint	Descrição
-GET	/api/tasks	Listar todas as tarefas
-POST	/api/tasks	Criar nova tarefa
-PUT	/api/tasks/<id>	Atualizar tarefa
-DELETE	/api/tasks/<id>	Excluir tarefa
-GET	/api/health	Status da API
+# GET	/api/tasks	Listar todas as tarefas
+# POST	/api/tasks	Criar nova tarefa
+# PUT	/api/tasks/<id>	Atualizar tarefa
+# DELETE	/api/tasks/<id>	Excluir tarefa
+# GET	/api/health	Status da API
+
 📊 Funcionalidades
 Gerenciamento de Tarefas
 ✅ CRUD Completo - Criar, ler, editar e excluir
-
 🏷️ Categorias - Lazer, Estudo, Trabalho, Saúde, Casa, Compras, Outros
-
 ⚡ Prioridades - Baixa, Média, Alta
-
 📅 Datas de Vencimento - Controle de prazos
-
 🔄 Status - Pendente/Concluída
 
 Interface
 🎨 Design Glassmorphism - Efeitos visuais modernos
-
 🔍 Busca em Tempo Real - Filtro instantâneo
-
 📱 Responsivo - Mobile-first design
-
 ⚡ Performance - Otimizado e rápido
-
 🔧 Configuração
+
 Variáveis de Ambiente (.env)
 env
 DB_HOST=localhost
@@ -117,6 +104,7 @@ DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=taskflow_db
 SECRET_KEY=sua_chave_secreta
+
 Estrutura do Banco
 sql
 CREATE TABLE tasks (
@@ -130,55 +118,40 @@ CREATE TABLE tasks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 🐛 Troubleshooting
-Problemas Comuns
-Backend não conecta ao MySQL:
-
-Verifique credenciais no .env
-
-Confirme se MySQL está rodando
-
-Teste conexão manualmente
+ Problemas Comuns
+# Backend não conecta ao MySQL:
+# Verifique credenciais no .env
+# Confirme se MySQL está rodando
+# Teste conexão manualmente
 
 Frontend não carrega tarefas:
-
-Verifique se backend está na porta 5000
-
-Confirme CORS está habilitado
-
-Cheque console do navegador (F12)
+# Verifique se backend está na porta 5000
+# Confirme CORS está habilitado
+# Cheque console do navegador (F12)
 
 Erros de data:
-
-Execute python fix_dates.py
-
-Verifique formato das datas (YYYY-MM-DD)
+# Execute python fix_dates.py
+# Verifique formato das datas (YYYY-MM-DD)
 
 📈 Próximas Melhorias
-Autenticação de usuários
-
-Sincronização em nuvem
-
-Notificações push
-
-Modo escuro
-
-Exportação de relatórios
+# Autenticação de usuários
+# Sincronização em nuvem
+# Notificações push
+# Modo escuro
+# Exportação de relatórios
 
 👨‍💻 Desenvolvimento
 Este projeto demonstra habilidades full-stack com:
 
-Arquitetura RESTful API
+# Arquitetura RESTful API
+# Design patterns MVC
+# Banco de dados relacional
+# Frontend moderno e responsivo
+# Integração contínua entre camadas
 
-Design patterns MVC
-
-Banco de dados relacional
-
-Frontend moderno e responsivo
-
-Integração contínua entre camadas
-
-Desenvolvido com 💻 por [Seu Nome]
-Sistema completo para organização pessoal e profissional
+Desenvolvido com 💻 por Rickelme David/Rafael Ferreira
+Sistema completo para fins academicos! 
 
 <div align="center"> 🎯 **TaskFlow - Organize sua vida, uma tarefa de cada vez!** </div>

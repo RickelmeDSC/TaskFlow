@@ -5,30 +5,22 @@
 }
 
 :root {
-    /* Sistema de Cores Expandido */
     --primary-50: #eef2ff;
     --primary-500: #6366f1;
     --primary-600: #4f46e5;
     --primary-700: #4338ca;
-    
-    /* Cores Semânticas */
     --success-50: #ecfdf5;
     --success-500: #10b981;
     --success-600: #059669;
-    
     --warning-50: #fffbeb;
     --warning-500: #f59e0b;
     --warning-600: #d97706;
-    
     --error-50: #fef2f2;
     --error-500: #ef4444;
     --error-600: #dc2626;
-    
     --info-50: #eff6ff;
     --info-500: #3b82f6;
     --info-600: #2563eb;
-    
-    /* Escala de Cinza */
     --gray-50: #f8fafc;
     --gray-100: #f1f5f9;
     --gray-200: #e2e8f0;
@@ -39,22 +31,16 @@
     --gray-700: #334155;
     --gray-800: #1e293b;
     --gray-900: #0f172a;
-    
-    /* Gradientes */
     --gradient-primary: linear-gradient(135deg, var(--primary-500), var(--primary-600));
     --gradient-success: linear-gradient(135deg, var(--success-500), var(--success-600));
     --gradient-warning: linear-gradient(135deg, var(--warning-500), var(--warning-600));
     --gradient-error: linear-gradient(135deg, var(--error-500), var(--error-600));
-    
-    /* Sistema de Espaçamento */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 1.5rem;
     --space-xl: 2rem;
     --space-2xl: 3rem;
-    
-    /* Sistema de Tipografia */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
     --text-base: 1rem;
@@ -63,21 +49,15 @@
     --text-2xl: 1.5rem;
     --text-3xl: 1.875rem;
     --text-4xl: 2.25rem;
-    
-    /* Border Radius */
     --radius-sm: 0.375rem;
     --radius: 0.75rem;
     --radius-lg: 1rem;
     --radius-xl: 1.5rem;
-    
-    /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 6px 10px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    
-    /* Transições */
     --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -96,7 +76,6 @@ body {
     margin: 0 auto;
 }
 
-/* Header Modernizado com Glassmorphism */
 .header {
     text-align: center;
     margin-bottom: var(--space-2xl);
@@ -145,7 +124,6 @@ body {
     opacity: 0.9;
 }
 
-/* Layout Principal */
 .app-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -153,7 +131,6 @@ body {
     margin-bottom: var(--space-2xl);
 }
 
-/* Glassmorphism Sections */
 .task-form-section, .tasks-section {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
@@ -194,7 +171,6 @@ body {
     width: 60px;
 }
 
-/* Formulários Melhorados */
 .form-group {
     margin-bottom: var(--space-xl);
 }
@@ -240,7 +216,6 @@ input:focus, select:focus, textarea:focus {
     transform: translateY(-2px);
 }
 
-/* Focus Visible para Acessibilidade */
 input:focus-visible, select:focus-visible, textarea:focus-visible {
     outline: 2px solid var(--primary-500);
     outline-offset: 2px;
@@ -250,7 +225,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     outline: none;
 }
 
-/* Botões Modernizados com Efeitos Avançados */
 .btn {
     padding: var(--space-lg) var(--space-2xl);
     border: none;
@@ -346,7 +320,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     font-size: var(--text-sm);
 }
 
-/* Estados de Loading */
 .btn-loading {
     position: relative;
     color: transparent;
@@ -372,7 +345,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     100% { transform: rotate(360deg); }
 }
 
-/* Filtros Estilizados */
 .filters {
     display: flex;
     gap: var(--space-sm);
@@ -406,7 +378,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     box-shadow: var(--shadow);
 }
 
-/* Lista de Tarefas Modernizada */
 .tasks-list {
     display: flex;
     flex-direction: column;
@@ -427,7 +398,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Stagger Animation */
 .task-item:nth-child(1) { animation-delay: 0.1s; }
 .task-item:nth-child(2) { animation-delay: 0.2s; }
 .task-item:nth-child(3) { animation-delay: 0.3s; }
@@ -466,7 +436,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     transform: scaleX(1);
 }
 
-/* Estados das Tarefas */
 .task-item.concluida {
     border-left-color: var(--success-500);
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(255, 255, 255, 0.05));
@@ -485,7 +454,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     border-left-color: var(--success-500);
 }
 
-/* Tarefas Vencidas */
 .task-overdue {
     border-left-color: var(--error-500) !important;
     background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(255, 255, 255, 0.05));
@@ -502,7 +470,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     font-weight: 700;
 }
 
-/* Header da Tarefa */
 .task-header {
     display: flex;
     justify-content: space-between;
@@ -519,7 +486,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     line-height: 1.4;
 }
 
-/* Badges de Prioridade */
 .task-priority {
     padding: var(--space-sm) var(--space-md);
     border-radius: 20px;
@@ -548,7 +514,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
-/* Badges de Categoria Melhoradas */
 .category-badge {
     padding: var(--space-sm) var(--space-md);
     border-radius: 20px;
@@ -602,7 +567,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     border: 1px solid rgba(107, 114, 128, 0.3);
 }
 
-/* Badge de Nova Tarefa */
 .new-badge {
     background: var(--gradient-success);
     color: white;
@@ -638,7 +602,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     flex-wrap: wrap;
 }
 
-/* Status Indicator */
 .status-indicator {
     width: 8px;
     height: 8px;
@@ -661,7 +624,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     gap: var(--space-sm);
 }
 
-/* Estados de Loading e Erro */
 .loading {
     text-align: center;
     padding: var(--space-2xl);
@@ -684,7 +646,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     backdrop-filter: blur(10px);
 }
 
-/* Empty State Estilizado */
 .empty-state {
     text-align: center;
     padding: var(--space-2xl);
@@ -703,7 +664,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     filter: grayscale(0.3);
 }
 
-/* Modal Modernizado */
 .modal {
     display: none;
     position: fixed;
@@ -770,7 +730,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     margin-top: var(--space-xl);
 }
 
-/* Debug Info Estilizado */
 .debug-info {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
@@ -785,7 +744,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Skeleton Loading */
 .skeleton {
     background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
     background-size: 200% 100%;
@@ -798,7 +756,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     100% { background-position: -200% 0; }
 }
 
-/* Responsividade Melhorada */
 @media (max-width: 768px) {
     body {
         padding: var(--space-md);
@@ -882,7 +839,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     }
 }
 
-/* Scrollbar Personalizada */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -901,7 +857,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     background: var(--primary-600);
 }
 
-/* Reduce Motion para Acessibilidade */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -910,7 +865,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     }
 }
 
-/* Utilitários */
 .text-gradient {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -932,7 +886,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
                 var(--gradient-primary) border-box;
 }
 
-/* Hover Effects para Itens Interativos */
 .task-item:hover .task-actions button {
     transform: scale(1.05);
 }
@@ -941,14 +894,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     transform: scale(1.1);
 }
 
-/* Performance Optimizations */
 .will-change {
     will-change: transform, opacity;
 }
 
-/* Adicione estas regras ao final do seu CSS */
-
-/* Barra de busca */
 .search-container {
     margin-bottom: 1.5rem;
 }
@@ -976,7 +925,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-/* Estatísticas */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1008,7 +956,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     letter-spacing: 0.5px;
 }
 
-/* Estados de sucesso */
 .success {
     background: rgba(16, 185, 129, 0.2);
     color: #86efac;
@@ -1020,74 +967,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
     backdrop-filter: blur(10px);
 }
 
-/* Badge de nova tarefa */
-.new-badge {
-    background: #10b981;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    margin-left: 8px;
-    animation: pulse 2s infinite;
-}
-
-/* Tarefa vencida */
-.task-overdue {
-    border-left-color: #ef4444 !important;
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(255, 255, 255, 0.05));
-    animation: pulse 2s infinite;
-}
-
-.overdue {
-    color: #ef4444 !important;
-    font-weight: 700;
-}
-
-/* Empty state */
-.empty-state {
-    text-align: center;
-    padding: 3rem 2rem;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    border: 2px dashed rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-}
-
-.empty-state::before {
-    content: '📝';
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 1rem;
-    filter: grayscale(0.3);
-}
-
-/* Badges melhorados */
 .task-badges {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-}
-
-.status-indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.status-pendente { 
-    background: #f59e0b;
-    box-shadow: 0 0 10px #f59e0b;
-}
-
-.status-concluida { 
-    background: #10b981;
-    box-shadow: 0 0 10px #10b981;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
 }

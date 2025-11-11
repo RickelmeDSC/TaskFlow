@@ -16,7 +16,6 @@ def fix_existing_dates():
         )
         
         with connection.cursor() as cursor:
-            # Buscar todas as tarefas
             cursor.execute("SELECT id, due_date FROM tasks WHERE due_date IS NOT NULL")
             tasks = cursor.fetchall()
             
@@ -26,19 +25,15 @@ def fix_existing_dates():
                 original_date = task['due_date']
                 if isinstance(original_date, str) and ('GMT' in original_date or 'UTC' in original_date):
                     try:
-                        # Converter para formato MySQL
                         date_str = original_date.split(' GMT')[0].split(' UTC')[0]
                         dt = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S')
                         mysql_date = dt.strftime('%Y-%m-%d')
-                        
-                        # Atualizar no banco
                         cursor.execute("UPDATE tasks SET due_date = %s WHERE id = %s", 
                                      (mysql_date, task['id']))
                         print(f"✅ Corrigido: ID {task['id']} - {original_date} -> {mysql_date}")
                         
                     except Exception as e:
                         print(f"❌ Erro ao corrigir tarefa {task['id']}: {e}")
-                        # Se não conseguir converter, define como NULL
                         cursor.execute("UPDATE tasks SET due_date = NULL WHERE id = %s", 
                                      (task['id'],))
                         print(f"⚠️  Definido como NULL: ID {task['id']}")

@@ -6,7 +6,6 @@
     <title>TaskFlow - Gerenciador de Tarefas</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
-        /* CORREÇÃO DOS SELECTS - TEXTO VISÍVEL */
         select {
             background: rgba(255, 255, 255, 0.95) !important;
             color: #1e293b !important;
@@ -25,7 +24,6 @@
             border-color: #6366f1 !important;
         }
 
-        /* ESTILOS PARA AS NOVAS FUNCIONALIDADES */
         .search-container {
             margin-bottom: 1.5rem;
         }
@@ -170,7 +168,6 @@
         </header>
 
         <div class="app-container">
-            <!-- Formulário de Nova Tarefa -->
             <div class="task-form-section">
                 <h2>Nova Tarefa</h2>
                 <form id="taskForm" class="task-form">
@@ -184,7 +181,6 @@
                         <textarea id="description" name="description" rows="3" placeholder="Descreva a tarefa (opcional)"></textarea>
                     </div>
                     
-                    <!-- Prioridade e Categoria na mesma linha -->
                     <div class="form-row">
                         <div class="form-group">
                             <label for="priority">Prioridade</label>
@@ -209,7 +205,6 @@
                         </div>
                     </div>
                     
-                    <!-- Data de vencimento após prioridade/categoria -->
                     <div class="form-group">
                         <label for="due_date">Data de Vencimento</label>
                         <input type="date" id="due_date" name="due_date">
@@ -219,16 +214,13 @@
                 </form>
             </div>
 
-            <!-- Lista de Tarefas -->
             <div class="tasks-section">
                 <h2>Minhas Tarefas</h2>
                 
-                <!-- Barra de Busca -->
                 <div class="search-container">
                     <input type="text" id="searchInput" placeholder="🔍 Buscar tarefas..." class="search-input">
                 </div>
 
-                <!-- Estatísticas -->
                 <div class="stats">
                     <div class="stat-item">
                         <span class="stat-number">0</span>
@@ -244,14 +236,12 @@
                     </div>
                 </div>
 
-                <!-- Filtros -->
                 <div class="filters">
                     <button class="filter-btn active" data-filter="all">Todas</button>
                     <button class="filter-btn" data-filter="pendente">Pendentes</button>
                     <button class="filter-btn" data-filter="concluida">Concluídas</button>
                 </div>
                 
-                <!-- Lista de Tarefas -->
                 <div id="tasksList" class="tasks-list">
                     <div class="loading">Carregando tarefas...</div>
                 </div>
@@ -259,7 +249,6 @@
         </div>
     </div>
 
-    <!-- Modal para Editar Tarefa -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -323,22 +312,13 @@
     </div>
 
     <script>
-        // =============================================
-        // CÓDIGO JAVASCRIPT INLINE - GARANTE FUNCIONAMENTO
-        // =============================================
-
-        // Configurações da API
         const API_BASE_URL = 'http://localhost:5000/api';
-
-        // Estado da aplicação
         let currentFilter = 'all';
         let tasks = [];
 
         console.log('🚀 TaskFlow Inicializado!');
 
-        // Função para exibir mensagens
         function showMessage(message, type = 'error') {
-            // Remover mensagens anteriores
             const existingMessages = document.querySelectorAll('.success, .error');
             existingMessages.forEach(msg => msg.remove());
             
@@ -356,7 +336,6 @@
             }, 5000);
         }
 
-        // Função utilitária para fazer requisições HTTP
         async function apiRequest(endpoint, options = {}) {
             try {
                 console.log(`🌐 Fazendo requisição: ${endpoint}`);
@@ -381,7 +360,6 @@
             }
         }
 
-        // Configurar os botões de filtro
         function setupFilters() {
             const filterButtons = document.querySelectorAll('.filter-btn');
             
@@ -395,7 +373,6 @@
             });
         }
 
-        // Configurar busca
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', (e) => {
@@ -419,7 +396,6 @@
             displayTasks(filteredTasks);
         }
 
-        // Atualizar estatísticas
         function updateStats() {
             const total = tasks.length;
             const pending = tasks.filter(t => t.status === 'pendente').length;
@@ -433,18 +409,12 @@
             }
         }
 
-        // =============================================
-        // GERENCIAMENTO DE TAREFAS
-        // =============================================
-
-        // Carregar todas as tarefas
         async function loadTasks() {
             const tasksList = document.getElementById('tasksList');
             
             try {
                 tasksList.innerHTML = '<div class="loading">🔄 Carregando tarefas...</div>';
                 
-                // Simular dados para teste (REMOVA quando conectar com a API)
                 if (!localStorage.getItem('tasks')) {
                     const sampleTasks = [
                         {
@@ -481,7 +451,6 @@
                     localStorage.setItem('tasks', JSON.stringify(sampleTasks));
                 }
                 
-                // Usar dados locais para teste (TROQUE por apiRequest quando conectar com a API)
                 const tasksData = JSON.parse(localStorage.getItem('tasks')) || [];
                 tasks = tasksData;
                 
@@ -495,7 +464,6 @@
             }
         }
 
-        // Exibir tarefas na lista
         function displayTasks(tasksToDisplay = tasks) {
             const tasksList = document.getElementById('tasksList');
             
@@ -571,13 +539,12 @@
             }).join('');
         }
 
-        // Adicionar nova tarefa
         document.getElementById('taskForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const taskData = {
-                id: Date.now(), // ID temporário
+                id: Date.now(),
                 title: formData.get('title').trim(),
                 description: formData.get('description').trim(),
                 priority: formData.get('priority'),
@@ -593,16 +560,13 @@
             }
             
             try {
-                // Adicionar à lista local (TROQUE por apiRequest quando conectar com a API)
                 tasks.push(taskData);
                 localStorage.setItem('tasks', JSON.stringify(tasks));
                 
-                // Limpar formulário
                 this.reset();
                 document.getElementById('priority').value = 'media';
                 document.getElementById('category').value = 'outros';
                 
-                // Recarregar tarefas
                 displayTasks(tasks);
                 updateStats();
                 showMessage('Tarefa criada com sucesso!', 'success');
@@ -613,7 +577,6 @@
             }
         });
 
-        // Atualizar status da tarefa
         async function updateTaskStatus(taskId) {
             try {
                 const taskIndex = tasks.findIndex(t => t.id == taskId);
@@ -630,7 +593,6 @@
             }
         }
 
-        // Editar tarefa
         async function editTask(taskId) {
             const task = tasks.find(t => t.id == taskId);
             if (task) {
@@ -646,7 +608,6 @@
             }
         }
 
-        // Salvar edição
         document.getElementById('editTaskForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -683,7 +644,6 @@
             }
         });
 
-        // Excluir tarefa
         async function deleteTask(taskId) {
             if (!confirm('Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita.')) return;
             
@@ -699,12 +659,10 @@
             }
         }
 
-        // Fechar modal
         function closeEditModal() {
             document.getElementById('editModal').style.display = 'none';
         }
 
-        // Event listeners do modal
         document.querySelector('.close').addEventListener('click', closeEditModal);
         document.getElementById('cancelEdit').addEventListener('click', closeEditModal);
         window.addEventListener('click', function(e) {
@@ -712,10 +670,6 @@
                 closeEditModal();
             }
         });
-
-        // =============================================
-        // FUNÇÕES UTILITÁRIAS
-        // =============================================
 
         function escapeHtml(unsafe) {
             if (!unsafe) return '';
@@ -777,10 +731,6 @@
             return diffDays <= 1;
         }
 
-        // =============================================
-        // INICIALIZAÇÃO
-        // =============================================
-
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📍 Inicializando TaskFlow...');
             setupFilters();
@@ -788,7 +738,6 @@
             loadTasks();
         });
 
-        // Exportar funções globais
         window.loadTasks = loadTasks;
         window.updateTaskStatus = updateTaskStatus;
         window.editTask = editTask;

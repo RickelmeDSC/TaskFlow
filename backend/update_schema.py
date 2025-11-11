@@ -15,7 +15,7 @@ def update_schema():
         )
         
         with connection.cursor() as cursor:
-            # Verificar se a coluna category existe
+            
             cursor.execute("""
                 SELECT COUNT(*) as count 
                 FROM information_schema.COLUMNS 
@@ -36,7 +36,7 @@ def update_schema():
             else:
                 print("✅ Coluna 'category' já existe!")
             
-            # Atualizar status para remover 'em_andamento'
+            
             print("🔄 Atualizando enum de status...")
             cursor.execute("""
                 ALTER TABLE tasks 

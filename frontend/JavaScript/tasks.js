@@ -1,6 +1,3 @@
-// Gerenciamento de Tarefas
-
-// Carregar todas as tarefas
 async function loadTasks() {
     const tasksList = document.getElementById('tasksList');
     
@@ -9,7 +6,7 @@ async function loadTasks() {
         console.log('📥 Carregando tarefas...');
         
         const tasksData = await apiRequest('/tasks');
-        tasks = tasksData; // Atualizar estado global
+        tasks = tasksData;
         displayTasks(tasks);
         updateStats();
         checkDueDates();
@@ -21,7 +18,6 @@ async function loadTasks() {
     }
 }
 
-// Exibir tarefas na lista
 function displayTasks(tasksToDisplay = tasks) {
     const tasksList = document.getElementById('tasksList');
     
@@ -30,7 +26,6 @@ function displayTasks(tasksToDisplay = tasks) {
         return;
     }
     
-    // Filtrar tarefas conforme o filtro atual
     const filteredTasks = tasksToDisplay.filter(task => {
         if (currentFilter === 'all') return true;
         return task.status === currentFilter;
@@ -98,7 +93,6 @@ function displayTasks(tasksToDisplay = tasks) {
     }).join('');
 }
 
-// Adicionar nova tarefa
 document.getElementById('taskForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -111,7 +105,6 @@ document.getElementById('taskForm').addEventListener('submit', async function(e)
         due_date: formData.get('due_date') || null
     };
     
-    // Validação básica
     if (!taskData.title) {
         showError('Por favor, insira um título para a tarefa.');
         return;
@@ -125,12 +118,10 @@ document.getElementById('taskForm').addEventListener('submit', async function(e)
             body: JSON.stringify(taskData)
         });
         
-        // Limpar formulário
         this.reset();
         document.getElementById('priority').value = 'media';
         document.getElementById('category').value = 'outros';
         
-        // Recarregar tarefas
         await loadTasks();
         showSuccess('Tarefa criada com sucesso!');
         
@@ -139,13 +130,11 @@ document.getElementById('taskForm').addEventListener('submit', async function(e)
     }
 });
 
-// Editar tarefa - abrir modal
 async function editTask(taskId) {
     try {
         console.log(`📝 Editando tarefa ID: ${taskId}`);
         const task = await apiRequest(`/tasks/${taskId}`);
         
-        // Preencher formulário de edição
         document.getElementById('edit_id').value = task.id;
         document.getElementById('edit_title').value = task.title;
         document.getElementById('edit_description').value = task.description || '';
@@ -154,7 +143,6 @@ async function editTask(taskId) {
         document.getElementById('edit_category').value = task.category;
         document.getElementById('edit_due_date').value = task.due_date || '';
         
-        // Abrir modal
         document.getElementById('editModal').style.display = 'block';
         console.log('✅ Formulário de edição carregado');
         
@@ -164,7 +152,6 @@ async function editTask(taskId) {
     }
 }
 
-// Salvar edição da tarefa
 document.getElementById('editTaskForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -180,7 +167,6 @@ document.getElementById('editTaskForm').addEventListener('submit', async functio
     
     const taskId = formData.get('id');
     
-    // Validação
     if (!taskData.title) {
         showError('Por favor, insira um título para a tarefa.');
         return;
@@ -194,7 +180,6 @@ document.getElementById('editTaskForm').addEventListener('submit', async functio
             body: JSON.stringify(taskData)
         });
         
-        // Fechar modal e recarregar tarefas
         closeEditModal();
         await loadTasks();
         showSuccess('Tarefa atualizada com sucesso!');
@@ -205,7 +190,6 @@ document.getElementById('editTaskForm').addEventListener('submit', async functio
     }
 });
 
-// Atualizar status da tarefa
 async function updateTaskStatus(taskId, newStatus) {
     try {
         console.log(`🔄 Atualizando status da tarefa ${taskId} para ${newStatus}`);
@@ -228,7 +212,6 @@ async function updateTaskStatus(taskId, newStatus) {
     }
 }
 
-// Excluir tarefa
 async function deleteTask(taskId) {
     if (!confirm('Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita.')) {
         return;
@@ -249,27 +232,20 @@ async function deleteTask(taskId) {
     }
 }
 
-// Fechar modal de edição
 function closeEditModal() {
     document.getElementById('editModal').style.display = 'none';
     console.log('📋 Modal fechado');
 }
 
-// Event listeners para o modal
 document.querySelector('.close').addEventListener('click', closeEditModal);
 document.getElementById('cancelEdit').addEventListener('click', closeEditModal);
 
-// Fechar modal ao clicar fora dele
 window.addEventListener('click', function(e) {
     const modal = document.getElementById('editModal');
     if (e.target === modal) {
         closeEditModal();
     }
 });
-
-// =============================================
-// FUNÇÕES UTILITÁRIAS
-// =============================================
 
 function escapeHtml(unsafe) {
     if (!unsafe) return '';
@@ -351,10 +327,9 @@ function isTaskNew(task) {
     const diffTime = Math.abs(now - created);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
-    return diffDays <= 1; // Considera "novo" por 1 dia
+    return diffDays <= 1;
 }
 
-// Exportar funções para escopo global
 window.loadTasks = loadTasks;
 window.editTask = editTask;
 window.updateTaskStatus = updateTaskStatus;
