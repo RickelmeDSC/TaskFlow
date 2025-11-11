@@ -1,4 +1,5 @@
 📋 TaskFlow - Gerenciador de Tarefas Completo
+
 https://img.shields.io/badge/Status-Conclu%C3%ADdo-green
 https://img.shields.io/badge/Frontend-HTML/CSS/JS-orange
 https://img.shields.io/badge/Backend-Flask/MySQL-blue
