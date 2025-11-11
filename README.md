@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 📋 TaskFlow - Gerenciador de Tarefas Completo
 
 ![Status](https://img.shields.io/badge/Status-Concluído-green)
@@ -7,9 +6,6 @@
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
 
 ## 📖 Sobre o Projeto
-=======
-📋 TaskFlow - Gerenciador de Tarefas Completo ![Status](https://img.shields.io/badge/Status-Concluído-green) ![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![Flask](https://img.shields.io/badge/Flask-3.0.0-lightgrey) ![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
->>>>>>> ac5758b97876ee032394bf38568dd1f23936333e
 
 O TaskFlow é um sistema completo de gerenciamento de tarefas com frontend moderno e backend robusto. Desenvolvido com tecnologias web full-stack, oferece uma experiência fluida com design glassmorphism e funcionalidades completas de CRUD.
 
@@ -119,7 +115,6 @@ DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=taskflow_db
 SECRET_KEY=sua_chave_secreta
-
 Estrutura do Banco
 sql
 CREATE TABLE tasks (
@@ -133,7 +128,6 @@ CREATE TABLE tasks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-
 🐛 Troubleshooting
 Problemas Comuns
 Backend não conecta ao MySQL:
@@ -176,7 +170,6 @@ Arquitetura RESTful API
 
 Design patterns MVC
 
-<<<<<<< HEAD
 Banco de dados relacional
 
 Frontend moderno e responsivo
@@ -187,6 +180,3 @@ Desenvolvido com 💻 por Rickelme David / Rafael Ferreira
 Sistema completo para fins acadêmicos!
 
 <div align="center"> 🎯 **TaskFlow - Organize sua vida, uma tarefa de cada vez!** </div> ```
-=======
-<div align="center"> 🎯 **TaskFlow - Organize sua vida, uma tarefa de cada vez!** </div>
->>>>>>> ac5758b97876ee032394bf38568dd1f23936333e
