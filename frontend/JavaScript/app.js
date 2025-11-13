@@ -120,7 +120,7 @@ function filterTasksBySearch(searchTerm) {
     
     const filteredTasks = tasks.filter(task => 
         task.title.toLowerCase().includes(searchTerm) ||
-        task.description.toLowerCase().includes(searchTerm) ||
+        (task.description && task.description.toLowerCase().includes(searchTerm)) ||
         task.category.toLowerCase().includes(searchTerm)
     );
     
@@ -156,17 +156,10 @@ function updateStats() {
 }
 
 function checkDueDates() {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    
     tasks.forEach(task => {
         if (task.due_date && task.status === 'pendente') {
-            const dueDate = new Date(task.due_date);
-            if (dueDate.toDateString() === today.toDateString()) {
-                console.log(`⚠️ Tarefa "${task.title}" vence hoje!`);
-            } else if (dueDate.toDateString() === tomorrow.toDateString()) {
-                console.log(`🔔 Tarefa "${task.title}" vence amanhã!`);
+            if (isTaskOverdue(task)) {
+                console.log(`🔴 Tarefa "${task.title}" está VENCIDA!`);
             }
         }
     });
@@ -190,24 +183,109 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(checkDueDates, 60000);
 });
 
-window.debugAPI = async function() {
-    console.log('🔍 Debugando API...');
+window.isTaskOverdue = function(task) {
+    if (!task.due_date || task.status === 'concluida') return false;
+    
     try {
-        const response = await fetch(`${API_BASE_URL}/health`);
-        const data = await response.json();
-        console.log('✅ Resposta da API:', data);
-        return data;
+        const hoje = new Date();
+        const ano = hoje.getFullYear();
+        const mes = hoje.getMonth() + 1;
+        const dia = hoje.getDate();
+        const hojeFormatado = `${ano}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+        
+        const dataVencimento = task.due_date;
+        
+        console.log('🔍 VERIFICAÇÃO:', {
+            tarefa: task.title,
+            vencimento: dataVencimento,
+            hoje: hojeFormatado,
+            comparacao: dataVencimento <= hojeFormatado
+        });
+        
+        return dataVencimento <= hojeFormatado;
+        
     } catch (error) {
-        console.error('❌ Erro na API:', error);
-        return null;
+        console.error('Erro ao verificar vencimento:', error);
+        return false;
     }
 }
 
-setTimeout(() => {
-    window.debugAPI();
-}, 1000);
+window.formatDate = function(dateString) {
+    if (!dateString) return '';
+    
+    try {
+        const partes = dateString.split('-');
+        if (partes.length === 3) {
+            return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        }
+        return dateString;
+    } catch (error) {
+        console.error('Erro ao formatar data:', error);
+        return dateString;
+    }
+}
+
+window.getStatusText = function(status) {
+    const statusMap = {
+        'pendente': 'Pendente',
+        'concluida': 'Concluída'
+    };
+    return statusMap[status] || status;
+}
+
+window.getPriorityText = function(priority) {
+    const priorityMap = {
+        'baixa': 'Baixa',
+        'media': 'Média',
+        'alta': 'Alta'
+    };
+    return priorityMap[priority] || priority;
+}
+
+window.getCategoryText = function(category) {
+    const categoryMap = {
+        'lazer': 'Lazer',
+        'estudo': 'Estudo',
+        'trabalho': 'Trabalho',
+        'saude': 'Saúde',
+        'casa': 'Casa',
+        'compras': 'Compras',
+        'outros': 'Outros'
+    };
+    return categoryMap[category] || category;
+}
+
+window.escapeHtml = function(unsafe) {
+    if (!unsafe) return '';
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+window.debugTask = function(taskId) {
+    const task = tasks.find(t => t.id == taskId);
+    if (task) {
+        const hoje = new Date();
+        const hojeFormatado = `${hoje.getFullYear()}-${(hoje.getMonth() + 1).toString().padStart(2, '0')}-${hoje.getDate().toString().padStart(2, '0')}`;
+        
+        console.log('🐛 DEBUG TAREFA:', {
+            id: task.id,
+            titulo: task.title,
+            vencimento: task.due_date,
+            hoje: hojeFormatado,
+            vencida: task.due_date < hojeFormatado,
+            status: task.status
+        });
+    }
+}
 
 window.apiRequest = apiRequest;
 window.showError = showError;
 window.showSuccess = showSuccess;
 window.currentFilter = currentFilter;
+window.filterTasksBySearch = filterTasksBySearch;
+
+console.log('✅ Todas as funções do app.js carregadas');

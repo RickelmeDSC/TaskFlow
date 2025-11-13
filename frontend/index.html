@@ -5,160 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskFlow - Gerenciador de Tarefas</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        select {
-            background: rgba(255, 255, 255, 0.95) !important;
-            color: #1e293b !important;
-            border: 2px solid rgba(255, 255, 255, 0.4) !important;
-        }
-
-        select option {
-            background: white;
-            color: #1e293b;
-            padding: 10px;
-        }
-
-        select:focus {
-            background: white !important;
-            color: #1e293b !important;
-            border-color: #6366f1 !important;
-        }
-
-        .search-container {
-            margin-bottom: 1.5rem;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 14px;
-            backdrop-filter: blur(10px);
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #6366f1;
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 0.5rem;
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #6366f1;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .success {
-            background: rgba(16, 185, 129, 0.2);
-            color: #86efac;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .new-badge {
-            background: #10b981;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            margin-left: 8px;
-            animation: pulse 2s infinite;
-        }
-
-        .task-overdue {
-            border-left-color: #ef4444 !important;
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(255, 255, 255, 0.05));
-            animation: pulse 2s infinite;
-        }
-
-        .overdue {
-            color: #ef4444 !important;
-            font-weight: 700;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: rgba(255, 255, 255, 0.7);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .empty-state::before {
-            content: '📝';
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 1rem;
-            filter: grayscale(0.3);
-        }
-
-        .task-badges {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .status-pendente { 
-            background: #f59e0b;
-            box-shadow: 0 0 10px #f59e0b;
-        }
-
-        .status-concluida { 
-            background: #10b981;
-            box-shadow: 0 0 10px #10b981;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -252,18 +98,18 @@
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Editar Tarefa</h2>
+            <h2>✏️ Editar Tarefa</h2>
             <form id="editTaskForm">
                 <input type="hidden" id="edit_id" name="id">
                 
                 <div class="form-group">
                     <label for="edit_title">Título *</label>
-                    <input type="text" id="edit_title" name="title" required>
+                    <input type="text" id="edit_title" name="title" required placeholder="Digite o título da tarefa">
                 </div>
                 
                 <div class="form-group">
                     <label for="edit_description">Descrição</label>
-                    <textarea id="edit_description" name="description" rows="3"></textarea>
+                    <textarea id="edit_description" name="description" rows="3" placeholder="Descreva a tarefa (opcional)"></textarea>
                 </div>
                 
                 <div class="form-row">
@@ -304,8 +150,8 @@
                 </div>
                 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                    <button type="button" class="btn btn-secondary" id="cancelEdit">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">💾 Salvar Alterações</button>
+                    <button type="button" class="btn btn-secondary" id="cancelEdit">❌ Cancelar</button>
                 </div>
             </form>
         </div>

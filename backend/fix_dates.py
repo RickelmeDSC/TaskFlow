@@ -1,8 +1,10 @@
+# fix_dates_complete.py
 import pymysql
 from config import Config
 from datetime import datetime
+import re
 
-def fix_existing_dates():
+def fix_all_dates():
     config = Config()
     
     try:
@@ -16,35 +18,55 @@ def fix_existing_dates():
         )
         
         with connection.cursor() as cursor:
+            # Busca todas as tarefas
             cursor.execute("SELECT id, due_date FROM tasks WHERE due_date IS NOT NULL")
             tasks = cursor.fetchall()
             
-            print(f"🔍 Encontradas {len(tasks)} tarefas com datas")
+            print(f"🔍 Encontradas {len(tasks)} tarefas com datas para corrigir")
             
             for task in tasks:
                 original_date = task['due_date']
-                if isinstance(original_date, str) and ('GMT' in original_date or 'UTC' in original_date):
-                    try:
-                        date_str = original_date.split(' GMT')[0].split(' UTC')[0]
-                        dt = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S')
-                        mysql_date = dt.strftime('%Y-%m-%d')
-                        cursor.execute("UPDATE tasks SET due_date = %s WHERE id = %s", 
-                                     (mysql_date, task['id']))
-                        print(f"✅ Corrigido: ID {task['id']} - {original_date} -> {mysql_date}")
+                corrected_date = None
+                
+                try:
+                    if isinstance(original_date, datetime):
+                        # Se já é datetime, converte para string
+                        corrected_date = original_date.strftime('%Y-%m-%d')
+                    elif isinstance(original_date, str):
+                        # Remove timezone info
+                        clean_date = original_date.split(' GMT')[0].split(' UTC')[0].split('+')[0].strip()
                         
-                    except Exception as e:
-                        print(f"❌ Erro ao corrigir tarefa {task['id']}: {e}")
+                        # Tenta diferentes formatos
+                        for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%d/%m/%Y', '%m/%d/%Y', '%a, %d %b %Y %H:%M:%S']:
+                            try:
+                                dt = datetime.strptime(clean_date, fmt)
+                                corrected_date = dt.strftime('%Y-%m-%d')
+                                break
+                            except ValueError:
+                                continue
+                    
+                    if corrected_date:
+                        cursor.execute("UPDATE tasks SET due_date = %s WHERE id = %s", 
+                                     (corrected_date, task['id']))
+                        print(f"✅ Corrigido: ID {task['id']} - '{original_date}' -> '{corrected_date}'")
+                    else:
+                        print(f"❌ Não foi possível corrigir: ID {task['id']} - '{original_date}'")
                         cursor.execute("UPDATE tasks SET due_date = NULL WHERE id = %s", 
                                      (task['id'],))
-                        print(f"⚠️  Definido como NULL: ID {task['id']}")
+                        
+                except Exception as e:
+                    print(f"❌ Erro ao corrigir tarefa {task['id']}: {e}")
+                    cursor.execute("UPDATE tasks SET due_date = NULL WHERE id = %s", 
+                                 (task['id'],))
             
             connection.commit()
-            print("🎉 Correção de datas concluída!")
+            print("🎉 Todas as datas foram corrigidas!")
             
     except Exception as e:
         print(f"❌ Erro geral: {e}")
     finally:
-        connection.close()
+        if 'connection' in locals():
+            connection.close()
 
 if __name__ == '__main__':
-    fix_existing_dates()
+    fix_all_dates()

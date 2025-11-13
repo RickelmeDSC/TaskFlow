@@ -7,6 +7,9 @@ async function loadTasks() {
         
         const tasksData = await apiRequest('/tasks');
         tasks = tasksData;
+        
+        console.log('📋 Tarefas carregadas:', tasks);
+        
         displayTasks(tasks);
         updateStats();
         checkDueDates();
@@ -39,6 +42,14 @@ function displayTasks(tasksToDisplay = tasks) {
     tasksList.innerHTML = filteredTasks.map(task => {
         const isOverdue = isTaskOverdue(task);
         const taskClasses = `task-item ${task.status} ${task.priority} ${isOverdue ? 'task-overdue' : ''}`;
+        
+
+        console.log('🎯 Tarefa exibida:', {
+            titulo: task.title,
+            vencimento: task.due_date,
+            vencida: isOverdue,
+            status: task.status
+        });
         
         return `
             <div class="${taskClasses}" data-task-id="${task.id}">
@@ -247,46 +258,6 @@ window.addEventListener('click', function(e) {
     }
 });
 
-function escapeHtml(unsafe) {
-    if (!unsafe) return '';
-    return unsafe
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-function getStatusText(status) {
-    const statusMap = {
-        'pendente': 'Pendente',
-        'concluida': 'Concluída'
-    };
-    return statusMap[status] || status;
-}
-
-function getPriorityText(priority) {
-    const priorityMap = {
-        'baixa': 'Baixa',
-        'media': 'Média',
-        'alta': 'Alta'
-    };
-    return priorityMap[priority] || priority;
-}
-
-function getCategoryText(category) {
-    const categoryMap = {
-        'lazer': 'Lazer',
-        'estudo': 'Estudo',
-        'trabalho': 'Trabalho',
-        'saude': 'Saúde',
-        'casa': 'Casa',
-        'compras': 'Compras',
-        'outros': 'Outros'
-    };
-    return categoryMap[category] || category;
-}
-
 function getFilterText(filter) {
     const filterMap = {
         'all': '',
@@ -294,29 +265,6 @@ function getFilterText(filter) {
         'concluida': 'concluída'
     };
     return filterMap[filter] || filter;
-}
-
-function formatDate(dateString) {
-    if (!dateString) return '';
-    
-    try {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR');
-    } catch (error) {
-        console.error('Erro ao formatar data:', error);
-        return dateString;
-    }
-}
-
-function isTaskOverdue(task) {
-    if (!task.due_date || task.status === 'concluida') return false;
-    
-    const today = new Date();
-    const dueDate = new Date(task.due_date);
-    today.setHours(0, 0, 0, 0);
-    dueDate.setHours(0, 0, 0, 0);
-    
-    return dueDate < today;
 }
 
 function isTaskNew(task) {
@@ -336,6 +284,5 @@ window.updateTaskStatus = updateTaskStatus;
 window.deleteTask = deleteTask;
 window.closeEditModal = closeEditModal;
 window.displayTasks = displayTasks;
-window.filterTasksBySearch = filterTasksBySearch;
 
 console.log('✅ tasks.js carregado com sucesso');
