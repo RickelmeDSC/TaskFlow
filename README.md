@@ -79,6 +79,8 @@ taskflow/
     ├── css/styles.css      # Estilos glassmorphism
     ├── js/app.js           # Configuração da aplicação
     └── js/tasks.js         # Funcionalidades de tarefas
+
+
 🔌 API Endpoints
 Método	Endpoint	Descrição
 GET	/api/tasks	Listar todas as tarefas
@@ -86,26 +88,21 @@ POST	/api/tasks	Criar nova tarefa
 PUT	/api/tasks/<id>	Atualizar tarefa
 DELETE	/api/tasks/<id>	Excluir tarefa
 GET	/api/health	Status da API
+
 📊 Funcionalidades
 Gerenciamento de Tarefas
 ✅ CRUD Completo - Criar, ler, editar e excluir
-
 🏷️ Categorias - Lazer, Estudo, Trabalho, Saúde, Casa, Compras, Outros
-
 ⚡ Prioridades - Baixa, Média, Alta
-
 📅 Datas de Vencimento - Controle de prazos
-
 🔄 Status - Pendente/Concluída
 
 Interface
 🎨 Design Glassmorphism - Efeitos visuais modernos
-
 🔍 Busca em Tempo Real - Filtro instantâneo
-
 📱 Responsivo - Mobile-first design
-
 ⚡ Performance - Otimizado e rápido
+
 
 🔧 Configuração
 Variáveis de Ambiente (.env)
@@ -115,6 +112,8 @@ DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=taskflow_db
 SECRET_KEY=sua_chave_secreta
+
+
 Estrutura do Banco
 sql
 CREATE TABLE tasks (
@@ -130,50 +129,34 @@ CREATE TABLE tasks (
 );
 🐛 Troubleshooting
 Problemas Comuns
+
 Backend não conecta ao MySQL:
-
 Verifique credenciais no .env
-
 Confirme se MySQL está rodando
-
 Teste conexão manualmente
 
 Frontend não carrega tarefas:
-
 Verifique se backend está na porta 5000
-
 Confirme CORS está habilitado
-
 Cheque console do navegador (F12)
 
 Erros de data:
-
 Execute python fix_dates.py
-
 Verifique formato das datas (YYYY-MM-DD)
 
 📈 Próximas Melhorias
 Autenticação de usuários
-
 Sincronização em nuvem
-
 Notificações push
-
 Modo escuro
-
 Exportação de relatórios
 
 👨‍💻 Desenvolvimento
 Este projeto demonstra habilidades full-stack com:
-
 Arquitetura RESTful API
-
 Design patterns MVC
-
 Banco de dados relacional
-
 Frontend moderno e responsivo
-
 Integração contínua entre camadas
 
 Desenvolvido com 💻 por Rickelme David / Rafael Ferreira
